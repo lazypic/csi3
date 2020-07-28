@@ -56,7 +56,7 @@
                     <span class="text-badge">{{.Date}} / <a href="/user?id={{.Author}}" class="text-darkmode">{{.Author}}</a></span>
                     <span class="edit" data-toggle="modal" data-target="#modal-editreviewcomment" onclick="setEditReviewCommentModal('{{$.CurrentReview.ID.Hex}}', '{{.Date}}', '{{.Text}}', '{{.MediaTitle}}', '{{.Media}}')">≡</span>
                     <span class="remove" data-toggle="modal" data-target="#modal-rmreviewcomment" onclick="setRmReviewCommentModal('{{$.CurrentReview.ID.Hex}}', '{{.Date}}')">×</span>
-                    <br><small class="text-white">{{.Text}}</small>
+                    <br><small class="text-white text-autowarp">{{.Text}}</small>
                     <hr class="my-1 p-0 m-0 divider"></hr></div>
                 {{end}}
             </div>
@@ -78,7 +78,7 @@
             <span class="player-trash" id="player-trash" onclick="removeDrawing()"></span>
             <span class="player-pen" id="player-pen"></span>
             <span class="player-text" id="player-text"></span>
-            <span class="player-screenshot mr-5" id="player-screenshot" onclick="screenshot()"></span>
+            <span class="player-screenshot mr-5" id="player-screenshot" onclick="screenshot('{{.CurrentReview.Project}}_{{.CurrentReview.Name}}_{{.CurrentReview.Task}}')"></span>
 
             <span class="player-start" id="player-start"></span>
             <span class="player-left" id="player-left"></span>
