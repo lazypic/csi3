@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/base64"
-	"log"
 	"net/http"
 	"strings"
 
@@ -134,31 +133,26 @@ func handleInputMode(w http.ResponseWriter, r *http.Request) {
 	}
 	rcp.Ddline3d, err = DistinctDdline(session, rcp.SearchOption.Project, "ddline3d")
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	rcp.Ddline2d, err = DistinctDdline(session, rcp.SearchOption.Project, "ddline2d")
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	rcp.Tags, err = Distinct(session, rcp.SearchOption.Project, "tag")
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	rcp.Assettags, err = Distinct(session, rcp.SearchOption.Project, "assettags")
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	rcp.Totalnum, err = Totalnum(session, rcp.SearchOption.Project)
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -171,7 +165,8 @@ func handleInputMode(w http.ResponseWriter, r *http.Request) {
 		}
 		dday, err := ToDday(rcp.Projectinfo.Deadline)
 		if err != nil {
-			log.Println(err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		rcp.Dday = dday
 	}
@@ -182,7 +177,6 @@ func handleInputMode(w http.ResponseWriter, r *http.Request) {
 	}
 	rcp.Searchnum, err = Searchnum(rcp.SearchOption, rcp.Items)
 	if err != nil {
-		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
